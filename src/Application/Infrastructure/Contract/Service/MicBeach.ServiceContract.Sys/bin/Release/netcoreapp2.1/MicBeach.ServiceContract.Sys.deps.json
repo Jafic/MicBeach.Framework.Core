@@ -1,0 +1,80 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": "64412756bb08cff88c5f4fb348c78dbec81bc5e4"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "MicBeach.ServiceContract.Sys/1.0.0": {
+        "dependencies": {
+          "MicBeach.DTO.Sys": "1.0.0",
+          "MicBeach.Develop": "1.0.0",
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.ServiceContract.Sys.dll": {}
+        }
+      },
+      "MicBeach.Application.Identity/1.0.1": {
+        "runtime": {
+          "lib/netcoreapp2.1/MicBeach.Application.Identity.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MicBeach.Develop/1.0.0": {
+        "dependencies": {
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.Develop.dll": {}
+        }
+      },
+      "MicBeach.DTO.Sys/1.0.0": {
+        "dependencies": {
+          "MicBeach.Application.Identity": "1.0.1",
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.DTO.Sys.dll": {}
+        }
+      },
+      "MicBeach.Util/1.0.0": {
+        "runtime": {
+          "MicBeach.Util.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MicBeach.ServiceContract.Sys/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Application.Identity/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XewoOH3WM4qmo31wRG3HRuhw11oR8ITeQJOo1fPvzN2Xe7x+UOoE+r876ZypPyeJIH9xWlkczWg6Rtc387dE6w==",
+      "path": "micbeach.application.identity/1.0.1",
+      "hashPath": "micbeach.application.identity.1.0.1.nupkg.sha512"
+    },
+    "MicBeach.Develop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.DTO.Sys/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Util/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

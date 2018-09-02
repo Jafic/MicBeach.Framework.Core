@@ -1,0 +1,236 @@
+﻿@{
+    string allAuthorityOperationGroup = ViewBag.AllAuthorityOperationGroup;
+    string nodeString = ViewBag.AllNodes;
+    bool lastChild = false;
+}
+<environment>
+    <link href="~/lib/ztree/skin.css" rel="stylesheet" />
+</environment>
+<div id="pc-body">
+    <div id="pcb-inner">
+        <ul id="authorityoperationgroup_tree" class="ztree"></ul>
+    </div>
+</div>
+<div id="pc-foot">
+    <div class="txt-right form-submitbtn-con pdr-10"><button type="button" onclick="ConfirmSelect()" class="btn btn-blue"><i class="glyphicon glyphicon-check"></i> 确定</button></div>
+</div>
+@section Scripts
+    {
+    <environment>
+        <script src="~/lib/ztree/jquery.ztree.all.js"></script>
+        <script src="~/lib/ztree/ztree.exhide.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/ztree/tree.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        var seetings = {
+            view: {
+                nameIsHTML: true,
+            },
+            callback: {
+                beforeExpand: BeforeExpand,
+                onCheck: CheckNodeEvent
+            },
+            check: {
+                enable: true,
+                chkboxType: { "Y": "", "N": "" }
+            },
+            edit: {
+                enable: true,
+                showRemoveBtn: false,
+                showRenameBtn: false
+            }
+        };
+        var allNodes = JSON.parse('@Html.Raw(nodeString)');
+        var allAuthorityOperationGroups = JSON.parse('@Html.Raw(allAuthorityOperationGroup)');
+        var authorityoperationgroupNames = '';
+        var selectAuthorityOperationGroup;
+        var lastChild = '@(lastChild.ToString().ToLower())' == "true";
+        var hideAuthorityOperationGroups = new Array();
+        var initSelectAuthorityOperationGroups = new Array();
+        var loadingIcoUrl = '/Content/Scripts/ztree/img/loading.gif';
+        $(function () {
+            InitAllAuthorityOperationGroupTree();
+            if (art.dialog.data("RemoveAuthorityOperationGroupSysNos")) {
+                hideAuthorityOperationGroups = art.dialog.data("RemoveAuthorityOperationGroupSysNos").split(",");
+            }
+            if (art.dialog.data("SelectAuthorityOperationGroupSysNos")) {
+                initSelectAuthorityOperationGroups = art.dialog.data("SelectAuthorityOperationGroupSysNos").split(",");
+            }
+            var treeObj = $.fn.zTree.getZTreeObj("authorityoperationgroup_tree");
+            var hideParentNodes = new Object();
+            for (var ha in hideAuthorityOperationGroups) {
+                var nowHaSysNo = hideAuthorityOperationGroups[ha];
+                var nodes = treeObj.getNodesByParam("id", nowHaSysNo);
+                for (var n in nodes) {
+                    var nowNode = nodes[n];
+                    var parentNode = nowNode.getParentNode();
+                    treeObj.hideNode(nowNode);
+                    if (parentNode != null) {
+                        hideParentNodes[parentNode.id] = parentNode;
+                        parentNode.halfCheck = true;
+                    }
+                }
+            }
+            for (var pn in hideParentNodes) {
+                var pnode = hideParentNodes[pn];
+                do {
+                    var checkStatus = pnode.getCheckStatus();
+                    if (checkStatus && !checkStatus.half) {
+                        pnode.halfCheck = true;
+                    }
+                    var childNodes = pnode.children;
+                    var hide = true;
+                    for (var pcn in childNodes) {
+                        var pchnode = childNodes[pcn];
+                        hide = hide && pchnode.isHidden;
+                        if (!hide) {
+                            break;
+                        }
+                    }
+                    if (hide) {
+                        treeObj.hideNode(pnode);
+                    }
+                    pnode = pnode.getParentNode();
+                } while (pnode != null);
+            }
+
+            //初始选中
+            for (var sa in initSelectAuthorityOperationGroups) {
+                var nowSelectSysNo = initSelectAuthorityOperationGroups[sa];
+                var nodes = treeObj.getNodesByParam("id", nowSelectSysNo);
+                for (var n in nodes) {
+                    var nowNode = nodes[n];
+                    treeObj.checkNode(nowNode, true, true, true);
+                }
+            }
+        });
+
+        //初始化所有分类树控件
+        function InitAllAuthorityOperationGroupTree() {
+            $.fn.zTree.init($("#authorityoperationgroup_tree"), seetings, allNodes);
+        }
+
+        //确认选择方法
+        function ConfirmSelect() {
+            authorityoperationgroupNames = '';
+            selectAuthorityOperationGroup = null;
+            var checkNodes = $.fn.zTree.getZTreeObj("authorityoperationgroup_tree").getCheckedNodes(true);
+            if (checkNodes && checkNodes.length > 0) {
+                var firstNode = checkNodes[0];
+                selectAuthorityOperationGroup = allAuthorityOperationGroups[firstNode.id];
+                authorityoperationgroupNames = selectAuthorityOperationGroup.Name;
+                var parentNode = firstNode.getParentNode();
+                while (parentNode)
+                {
+                    var parentGroup = allAuthorityOperationGroups[parentNode.id];
+                    if (parentGroup) {
+                        authorityoperationgroupNames = parentGroup.Name + '>' + authorityoperationgroupNames;
+                    }
+                    parentNode = parentNode.getParentNode();
+                }
+            }
+            art.dialog.close(true);
+            art.dialog.opener.AuthorityOperationGroupSingleSelectCallback(selectAuthorityOperationGroup, authorityoperationgroupNames);
+        }
+
+        //初始化单个选择节点
+        function SelectSingleItem(treeNode, allNodes) {
+            if (!treeNode) {
+                return;
+            }
+            var nowName = '';
+            var allChecked = GetNodeCheckStatus(treeNode);
+            var nowId = treeNode.id;
+            var nowAuthorityOperationGroup = allAuthorityOperationGroupsObj[nowId];
+            if (!nowAuthorityOperationGroup) {
+                return;
+            }
+            if (treeNode.checked) {
+                nowName = nowAuthorityOperationGroup.Name;
+            }
+            if (!lastChild && treeNode.checked) {
+                selectAuthorityOperationGroup.push(nowAuthorityOperationGroup);
+            }
+            else if (allChecked) {
+                var parentNode = treeNode.getParentNode();
+                var parentChecked = GetNodeCheckStatus(parentNode);
+                if (!parentChecked) {
+                    selectAuthorityOperationGroup.push(nowAuthorityOperationGroup);
+                }
+            }
+            if (!allChecked) {
+                var childNodes = new Array();
+                for (var cn in allNodes) {
+                    var nowChildNode = allNodes[cn];
+                    var childAuthorityOperationGroup = allAuthorityOperationGroupsObj[nowChildNode.id];
+                    if (childAuthorityOperationGroup.Level > 1 && childAuthorityOperationGroup.ParentAuthorityOperationGroup == nowId) {
+                        childNodes.push(nowChildNode);
+                    }
+                }
+                var childNames = new Array();
+                for (var cn in childNodes) {
+                    var itemResult = SelectSingleItem(childNodes[cn], allNodes);
+                    var itemNames = $.trim(itemResult.AuthorityOperationGroupNames);
+                    if (itemNames != "") {
+                        childNames.push(itemNames);
+                    }
+                }
+                if (childNames.length > 0) {
+                    nowName = nowName + '：[ ' + childNames.join(",") + " ]";
+                }
+            }
+            return { AuthorityOperationGroupNames: nowName }
+        }
+
+        //获取节点全选状态
+        function GetNodeCheckStatus(treeNode) {
+            if (!treeNode) {
+                return false;
+            }
+            var halfStatus = treeNode.getCheckStatus();
+            var checked = halfStatus.checked && !halfStatus.half;
+            var childNodes = treeNode.children;
+            for (var cn in childNodes) {
+                var cnode = childNodes[cn];
+                checked = checked && !cnode.isHidden;
+            }
+            return checked;
+        }
+
+        //展开加载数据
+        function BeforeExpand(treeId, treeNode) {
+            if (!treeNode || treeNode.loadData) {
+                return true;
+            }
+            var zTree = $.fn.zTree.getZTreeObj(treeId);
+            treeNode.icon = loadingIcoUrl;
+            zTree.updateNode(treeNode);
+            $.post('@Url.Action("LoadChildAuthorityOperationGroups","Sys")', { parentId: treeNode.id }, function (res) {
+                if (!res) {
+                    return;
+                }
+                var childNodes = JSON.parse(res.ChildNodes);
+                zTree.addNodes(treeNode, -1, childNodes);
+                treeNode.loadData = true;
+                treeNode.icon = "";
+                zTree.updateNode(treeNode);
+                zTree.expandNode(treeNode, true);
+                var childAuthorityOperationGroups = JSON.parse(res.AuthorityOperationGroupData);
+                for (var c in childAuthorityOperationGroups) {
+                    allAuthorityOperationGroups[c] = childAuthorityOperationGroups[c];
+                }
+            });
+            return false;
+        }
+
+        //选择节点时执行的方法
+        function CheckNodeEvent(event, treeId, treeNode){
+            var zTree = $.fn.zTree.getZTreeObj(treeId);
+            zTree.checkAllNodes(false);
+            zTree.checkNode(treeNode,true,false);
+        }
+
+    </script>
+}

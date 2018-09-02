@@ -1,0 +1,35 @@
+@using MicBeach.Util.Paging
+@using MicShop.ViewModel.Cache;
+@using MicBeach.Util.Extension
+@model IPaging<ServerViewModel>
+
+@if (Model == null || Model.TotalCount <= 0)
+{
+    <tr class="empty_tr"><td colspan="8" class="t_c cb_col">暂无数据...</td></tr>
+}
+else
+{
+    int trIndex = 1;
+    foreach (ServerViewModel server in Model)
+    {
+        <tr class="@(trIndex%2!=0?"":"listr_bg")">
+            <td class="cb_col">
+                <input type="checkbox" class="table_cbox" value="@server.Id" />
+            </td>
+            <td width="150px">@server.Name</td>
+            <td>@server.Host</td>
+            @*<td width="150px">@server.Password</td>*@
+            <td width="62px">
+                <div class="btn-group">
+                    <button type="button" class="btn btn_blue dropdown-toggle pd_5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        管理 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="width:100px;left:-52px;">
+                        <li><a href="javascript:void(0)" class="btn_detail" sysno="@server.Id" username="@server.Name"><i class="glyphicon glyphicon-list-alt" style="margin-left:12px;margin-right:6px"></i>详情</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        trIndex++;
+    }
+}

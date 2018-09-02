@@ -1,0 +1,9 @@
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\bin\Debug\netcoreapp2.1\MicBeach.Application.Identity.deps.json
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\bin\Debug\netcoreapp2.1\MicBeach.Application.Identity.dll
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\bin\Debug\netcoreapp2.1\MicBeach.Application.Identity.pdb
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\obj\Debug\netcoreapp2.1\MicBeach.Application.Identity.csprojAssemblyReference.cache
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\obj\Debug\netcoreapp2.1\MicBeach.Application.Identity.csproj.CoreCompileInputs.cache
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\obj\Debug\netcoreapp2.1\MicBeach.Application.Identity.AssemblyInfoInputs.cache
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\obj\Debug\netcoreapp2.1\MicBeach.Application.Identity.AssemblyInfo.cs
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\obj\Debug\netcoreapp2.1\MicBeach.Application.Identity.dll
+F:\GitHubProject\MicBeach.Framework.Core\src\Dev\MicBeach.Application.Identity\obj\Debug\netcoreapp2.1\MicBeach.Application.Identity.pdb

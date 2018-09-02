@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+<PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Dev\MicBeach.Serialize.Json.JsonNet\MicBeach.Serialize.Json.JsonNet.csproj" />
+    <ProjectReference Include="..\..\..\..\Dev\MicBeach.VerificationCode.SkiaSharp\MicBeach.VerificationCode.SkiaSharp.csproj" />
+    <ProjectReference Include="..\..\..\..\Dev\MicBeach.Web\MicBeach.Web.csproj" />
+    <ProjectReference Include="..\..\..\Logic\Service\MicBeach.Service.Sys\MicBeach.Service.Sys.csproj" />
+    <ProjectReference Include="..\..\Contract\Service\MicBeach.ServiceContract.Sys\MicBeach.ServiceContract.Sys.csproj" />
+  </ItemGroup>
+
+</Project>

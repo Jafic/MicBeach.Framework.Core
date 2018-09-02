@@ -1,0 +1,12 @@
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\bin\Release\netcoreapp2.1\MicBeach.Develop.deps.json
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\bin\Release\netcoreapp2.1\MicBeach.Develop.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\bin\Release\netcoreapp2.1\MicBeach.Develop.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.Develop\obj\Release\netcoreapp2.1\MicBeach.Develop.pdb

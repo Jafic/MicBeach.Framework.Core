@@ -1,0 +1,278 @@
+﻿
+@{
+    ViewBag.Title = "编辑用户";
+}
+@using MicBeach.ViewModel.Sys
+@using MicBeach.Util.Extension
+@using MicBeach.Util.Extension;
+@using MicBeach.Application.Identity.User;
+@model AdminUserViewModel
+@{
+    List<RoleViewModel> roleList = Model?.Roles ?? new List<RoleViewModel>(0);
+    bool isAdd = Model == null || Model.SysNo <= 0;
+}
+
+<div id="pc-body">
+    <div id="pc-body-inner">
+        <div class="form-con" id="home">
+            <div class="form-ingroup">
+                @*<h5 class="fig-tit blod fz_12 pd_l_5 b_t_none bg_f5">
+                        基础信息
+                    </h5>*@
+                <div class="fig-body">
+                    @using (Html.AjaxBeginForm("Edituser", "sys", new AjaxFormOptions() { HttpMethod = "Post", OnSuccess = "SuccessCallback", OnFailure = "FailedCallback" }, new { id = "formvalide" }))
+                    {
+                        @Html.Hidden("SysNo", null, new { id = "SysNo" })
+                        <input type="hidden" name="userRoles" id="userRoles" />
+                        <table cellpadding="0" cellspacing="0" class="form_table">
+                            @if (isAdd)
+                            {
+                                <tr>
+                                    <td class="txt-right tit">* @Html.LabelFor(c => c.UserName)</td>
+                                    <td>
+                                        @Html.TextBoxFor(a => a.UserName, new { @class = "form-control w-200" })
+                                        @Html.DefaultValidationMessageFor(a => a.UserName, "", new { @class = "tip prompt" })
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td class="txt-right tit">* @Html.LabelFor(c => c.UserName)</td>
+                                    <td>
+                                        【@Model.UserName】
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td class="txt-right tit">* @Html.LabelFor(c => c.RealName)</td>
+                                <td>
+                                    @Html.TextBoxFor(a => a.RealName, new { @class = "form-control w-200" })
+                                    @Html.DefaultValidationMessageFor(a => a.RealName, "", new { @class = "tip prompt" })
+                                </td>
+                            </tr>
+                            @if (isAdd)
+                            {
+                                <tr>
+                                    <td class="txt-right tit">* @Html.LabelFor(c => c.Pwd)</td>
+                                    <td>
+                                        @Html.PasswordFor(a => a.Pwd, new { @class = "form-control w-200" })
+                                        @Html.DefaultValidationMessageFor(a => a.Pwd, "", new { @class = "tip prompt" })
+                                    </td>
+                                </tr>
+                            }
+                            @if (!Model.SuperUser)
+                            {
+                                <tr>
+                                    <td class="txt-right tit">* @Html.LabelFor(c => c.Status)</td>
+                                    <td>
+                                        @Html.EnumToSelect(a => a.Status, UserStatus.正常, new { @class = "form-control w-200" }, "", "选择状态", ((int)Model.Status).ToString())
+                                        @Html.DefaultValidationMessageFor(a => a.Status, "", new { @class = "tip prompt" })
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td class="txt-right tit">@Html.LabelFor(c => c.Mobile)</td>
+                                <td>
+                                    @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control w-200" })
+                                    @Html.DefaultValidationMessageFor(a => a.Mobile, "", new { @class = "tip prompt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-right tit">@Html.LabelFor(c => c.Email)</td>
+                                <td>
+                                    @Html.TextBoxFor(a => a.Email, new { @class = "form-control w-200" })
+                                    @Html.DefaultValidationMessageFor(a => a.Email, "", new { @class = "tip prompt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-right tit">@Html.LabelFor(c => c.QQ)</td>
+                                <td>
+                                    @Html.TextBoxFor(a => a.QQ, new { @class = "form-control w-200" })
+                                    @Html.DefaultValidationMessageFor(a => a.QQ, "", new { @class = "tip prompt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-right tit">详情</td>
+                                <td>
+                                    <script id="container" class="h-400" name="content" type="text/plain">
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+
+                </div>
+            </div>
+
+            <div class="form-ingroup h-20"></div>
+        </div>
+
+        <div class="form_tabgroup" style="height:auto">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#goodsinfo" role="tab" data-toggle="tab" class="bd-rad-0 bd-lw-0">用户角色</a>
+                </li>
+            </ul>
+            <div class="form_tabgconent tab-content bd-lw-0 bd-rw-0 bd-bw-0">
+                <div role="tabpanel" class="tab-pane active" id="goodsinfo">
+                    <div class="panel-body pd-0 b-r-radnone b-l-radnone">
+                        <div class="panel-body pd-5">
+                            <div class="lis_lefttool"></div>
+                            <div class="lis_search">
+                                <button type="button" class="btn btn-success" id="btn_selectrole"><i class="glyphicon glyphicon-plus"></i> 选择角色</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-bordered nowrap wp-100 bd-lw-0" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="bd-lw-0">角色名</th>
+                                <th width="65px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roletabe_page_list">
+                            @if (roleList.IsNullOrEmpty())
+                            {
+                            }
+                            else
+                            {
+                                foreach (var role in roleList)
+                                {
+                                    <tr>
+                                        <td class="b_l_none">@role.Name</td>
+                                        <td><button type="button" class="btn btn-xs btn-danger btn_removerole" sysno="@role.SysNo"><i class="glyphicon glyphicon-trash"></i> 移除</button></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pc-foot">
+    <div class="txt-right form-submitbtn-con pdr-10">
+        <button class="btn btn-blue" id="btn_submit"><i class="glyphicon glyphicon-floppy-save"></i> 提交</button>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/lib/editor/ueditor.config.js"></script>
+    <script src="~/lib/editor/ueditor.all.js"></script>
+    <script src="~/lib/editor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        //BodyScroll = false;
+        PositionListTable = false;
+        var userRoles = new Object();
+        var userDetailUrl = '@Url.Action("AdminUserDetail","Sys",new { id="_id"})';
+        $(function () {
+            UE.getEditor('container');
+            $("#btn_submit").click(function () {
+                InitRoleValue();
+                $("#formvalide").submit();
+            });
+
+            //初始化角色数据
+            $("#roletabe_page_list tr").each(function (i, e) {
+                var ele = $(e);
+                var removeBtn = ele.find('.btn_removerole');
+                var sysNo = $.trim(removeBtn.attr("sysno"));
+                if (sysNo == "") {
+                    return true;
+                }
+                userRoles[sysNo] = { Data: { SysNo: sysNo }, Ele: ele, IsNew: false, Status: true };
+            });
+
+            //选择角色
+            $("#btn_selectrole").click(function () {
+                DialogPage({
+                    url: '@Url.Action("RoleMultipleSelector","Sys")',
+                    width: "300px",
+                    height: "350px",
+                    title: '选择角色',
+                    ok: false,
+                    cancel: null
+                });
+            });
+
+            //移除角色
+            $("body").on("click", ".btn_removerole", function () {
+                RemoveRole($(this).attr("sysno"));
+            });
+        });
+
+        //角色选择回调
+        function RoleMultipleSelectCallback(roles, roleName) {
+            if (!roles) {
+                return;
+            }
+            $("#role_empty_tr").remove();
+            for (var r in roles) {
+                var roleData = roles[r];
+                var nowRole = userRoles[roleData.SysNo];
+                if (!nowRole) {
+                    var ele = $('<tr><td class="b_l_none">' + roleData.Name + '</td><td><button type="button" class="btn btn-xs btn-danger btn_removerole" sysno="' + roleData.SysNo + '"><i class="glyphicon glyphicon-trash"></i> 移除</button></td></tr>');
+                    nowRole = { Data: roleData, Ele: ele, IsNew: true, Status: true };
+                    userRoles[roleData.SysNo] = nowRole;
+                    $("#roletabe_page_list").append(ele);
+                } else if (nowRole.Status == 0) {
+                    nowRole.Status = 1;
+                    $("#roletabe_page_list").append(nowRole.Ele);
+                }
+            }
+        }
+
+        //成功回调
+        function SuccessCallback(res) {
+            if (!res) {
+                return;
+            }
+            res = JSON.parse(res);
+            ResultMsg(res);
+            if (res.Success) {
+                window.top.RedirectCurrentPage(userDetailUrl.replace('_id', res.Data.SysNo), '用户详情');
+            }
+        }
+
+        //失败回掉
+        function FailedCallback() {
+            ErrorMsg('提交失败');
+        }
+
+        //移除角色
+        function RemoveRole(roleId) {
+            if (!roleId) {
+                return;
+            }
+            var nowRole = userRoles[roleId];
+            if (!nowRole) {
+                return;
+            }
+            nowRole.Status = false;
+            userRoles[roleId] = nowRole;
+            nowRole.Ele.remove();
+        }
+
+        //初始化角色
+        function InitRoleValue() {
+            if (!userRoles) {
+                return;
+            }
+            //var removeRoles = new Array();
+            //var newRoles = new Array();
+            var nowRoles = new Array();
+            for (var r in userRoles) {
+                var nowRole = userRoles[r];
+                if (!nowRole) {
+                    return;
+                }
+                if (nowRole.Status) {
+                    nowRoles.push(r);
+                }
+            }
+            $("#userRoles").val(nowRoles.join(','));
+        }
+    </script>
+}

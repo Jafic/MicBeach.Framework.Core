@@ -1,0 +1,75 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "MicBeach.BusinessContract.Sys/1.0.0": {
+        "dependencies": {
+          "MicBeach.DTO.Sys": "1.0.0",
+          "MicBeach.Develop": "1.0.0",
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.BusinessContract.Sys.dll": {}
+        }
+      },
+      "MicBeach.Application.Identity/1.0.0": {
+        "runtime": {
+          "MicBeach.Application.Identity.dll": {}
+        }
+      },
+      "MicBeach.Develop/1.0.0": {
+        "dependencies": {
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.Develop.dll": {}
+        }
+      },
+      "MicBeach.DTO.Sys/1.0.0": {
+        "dependencies": {
+          "MicBeach.Application.Identity": "1.0.0",
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.DTO.Sys.dll": {}
+        }
+      },
+      "MicBeach.Util/1.0.0": {
+        "runtime": {
+          "MicBeach.Util.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MicBeach.BusinessContract.Sys/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Application.Identity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Develop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.DTO.Sys/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Util/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

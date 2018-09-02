@@ -1,0 +1,8 @@
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\bin\Release\netcoreapp2.1\MicBeach.ViewModel.Common.deps.json
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\bin\Release\netcoreapp2.1\MicBeach.ViewModel.Common.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\bin\Release\netcoreapp2.1\MicBeach.ViewModel.Common.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Common.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Common.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Common.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Common.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Common\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Common.pdb

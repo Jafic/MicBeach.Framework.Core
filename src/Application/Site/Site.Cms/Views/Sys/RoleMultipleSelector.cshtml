@@ -1,0 +1,168 @@
+﻿@{
+    string allRole = ViewBag.AllRole;
+    string nodeString = ViewBag.AllNodes;
+    bool lastChild = ViewBag.LastChild;
+}
+<environment>
+    <link href="~/lib/ztree/skin.css" rel="stylesheet" />
+</environment>
+<style type="text/css">
+    .ztree li span.button.ico_docu {
+        background-position: -110px 0;
+    }
+
+    .ztree li span.button.chk.checkbox_false_part {
+        background-position: 0px 0px;
+    }
+</style>
+<div id="pc-body" class="b_none">
+    <div id="pc-body-inner">
+        <ul id="role_tree" class="ztree"></ul>
+    </div>
+</div>
+<div id="pc-foot">
+    <div class="txt-right form-submitbtn-con pdr-10"><button type="button" onclick="ConfirmSelect()" class="btn btn-blue">确定</button></div>
+</div>
+@section Scripts
+    {
+    <environment>
+        <script src="~/lib/ztree/jquery.ztree.all.js"></script>
+        <script src="~/lib/ztree/ztree.exhide.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/ztree/tree.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        var loadingIcoUrl = '/Content/Scripts/ztree/img/loading.gif';
+        var seetings = {
+            view: {
+                nameIsHTML: true,
+            },
+            callback: {
+                beforeExpand: BeforeExpand
+            },
+            check: {
+                enable: true,
+                chkboxType: { "Y": "", "N": "" }
+            },
+            edit: {
+                enable: true,
+                showRemoveBtn: false,
+                showRenameBtn: false
+            }
+        };
+        var allNodes = JSON.parse('@Html.Raw(nodeString)');
+        var allRoles = JSON.parse('@Html.Raw(allRole)');
+        var allRolesObj = new Object();
+        var roleNames = '';
+        var selectRole = new Array();
+        var lastChild = '@(lastChild.ToString().ToLower())' == "true";
+        var hideRoles = new Array();
+        var initSelectRoles = new Array();
+        $(function () {
+            InitAllRoleTree();
+            for (var a in allRoles) {
+                var role = allRoles[a];
+                allRolesObj[role.SysNo] = role;
+            }
+            if (art.dialog.data("RemoveRoleSysNos")) {
+                hideRoles = art.dialog.data("RemoveRoleSysNos").split(",");
+            }
+            if (art.dialog.data("SelectRoleSysNos")) {
+                initSelectRoles = art.dialog.data("SelectRoleSysNos").split(",");
+            }
+            var treeObj = $.fn.zTree.getZTreeObj("role_tree");
+            var hideParentNodes = new Object();
+            for (var ha in hideRoles) {
+                var nowHaSysNo = hideRoles[ha];
+                var nodes = treeObj.getNodesByParam("id", nowHaSysNo);
+                for (var n in nodes) {
+                    var nowNode = nodes[n];
+                    var parentNode = nowNode.getParentNode();
+                    treeObj.hideNode(nowNode);
+                    if (parentNode != null) {
+                        hideParentNodes[parentNode.id] = parentNode;
+                        parentNode.halfCheck = true;
+                    }
+                }
+            }
+            for (var pn in hideParentNodes) {
+                var pnode = hideParentNodes[pn];
+                do {
+                    var checkStatus = pnode.getCheckStatus();
+                    if (checkStatus && !checkStatus.half) {
+                        pnode.halfCheck = true;
+                    }
+                    var childNodes = pnode.children;
+                    var hide = true;
+                    for (var pcn in childNodes) {
+                        var pchnode = childNodes[pcn];
+                        hide = hide && pchnode.isHidden;
+                        if (!hide) {
+                            break;
+                        }
+                    }
+                    if (hide) {
+                        treeObj.hideNode(pnode);
+                    }
+                    pnode = pnode.getParentNode();
+                } while (pnode != null);
+            }
+
+            //初始选中
+            for (var sa in initSelectRoles) {
+                var nowSelectSysNo = initSelectRoles[sa];
+                var nodes = treeObj.getNodesByParam("id", nowSelectSysNo);
+                for (var n in nodes) {
+                    var nowNode = nodes[n];
+                    treeObj.checkNode(nowNode, true, true, true);
+                }
+            }
+        })
+
+        //初始化所有分类树控件
+        function InitAllRoleTree() {
+            $.fn.zTree.init($("#role_tree"), seetings, allNodes);
+        }
+
+        //确认选择方法
+        function ConfirmSelect() {
+            roleNames = '';
+            selectRole = new Array();
+            var checkNodes = $.fn.zTree.getZTreeObj("role_tree").getCheckedNodes(true);
+            for (var i = 0; i < checkNodes.length; i++) {
+                var nowNode = checkNodes[i];
+                var nowRole = allRolesObj[nowNode.id];
+                selectRole.push(nowRole);
+            }
+            art.dialog.close(true);
+            art.dialog.opener.RoleMultipleSelectCallback(selectRole, '');
+        }
+
+        //展开加载数据
+        function BeforeExpand(treeId, treeNode) {
+            if (!treeNode || treeNode.loadData) {
+                return true;
+            }
+            var zTree = $.fn.zTree.getZTreeObj(treeId);
+            treeNode.icon = loadingIcoUrl;
+            zTree.updateNode(treeNode);
+            $.post('@Url.Action("LoadChildRoles","Sys")', { parentId: treeNode.id }, function (res) {
+                if (!res) {
+                    return;
+                }
+                var childNodes = JSON.parse(res.ChildNodes);
+                zTree.addNodes(treeNode, -1, childNodes);
+                treeNode.loadData = true;
+                treeNode.icon = "";
+                zTree.updateNode(treeNode);
+                zTree.expandNode(treeNode, true);
+                var childRoles = JSON.parse(res.RoleData);
+                for (var c in childRoles) {
+                    allRolesObj[c] = childRoles[c];
+                }
+            });
+            return false;
+        }
+    </script>
+}

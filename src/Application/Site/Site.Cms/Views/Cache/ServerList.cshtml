@@ -1,0 +1,147 @@
+@{
+    ViewBag.Title = "缓存服务器管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="pc-head" class="container pd-0 wp-100 pdt-10 pdb-10">
+    <div class="row pd-0 mg-0">
+        <div class="column col-lg-11 col-md-11 col-sm-11 col-xs-11 hidden-xs lis_search pd-0">
+            <span class="search_inputgroup"><label class="stit">服务名称</label><span class="sctrol"><input type="text" placeholder="" class="form-control" /></span></span>
+            <span class="search_inputgroup"><button class="btn btn-default" type="button" id="search_btn"><i class="glyphicon glyphicon-search"></i> 搜索</button></span>
+        </div>
+        <div class="column col-lg-1 col-md-1 col-sm-1 col-xs-12 pd-0 text-right">
+            <div class="btn-group mgr-5">
+                <button type="button" class="btn btn-sm btn-blue dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    管理操作<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu left-n-38">
+                    <li><a href="javascript:void(0)" id="create_btn"><i class="glyphicon glyphicon-plus"></i> 添加服务</a></li>
+                    <li><a href="javascript:void(0)" id="deleteselect_btn"><i class="glyphicon glyphicon-trash"></i> 删除选中</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="pc-body">
+    <div id="pc-body-inner">
+        <table id="server_table" class="table table-striped table-bordered nowrap wp-100 bd-lw-0" cellpadding="0" cellspacing="0"></table>
+    </div>
+</div>
+
+<div id="pc-foot" class="wp-100 bd-t-solid bd-t-ddd bd-tw-1"></div>
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            BodyScroll = false;
+
+            InitDataTable({
+                TableEle: '#server_table',
+                "columnDefs": [
+                            {
+                                "title": '<input type="checkbox" class="cbx_all"/>', "targets": 0, "data": function (row, type, val, meta) {
+                                    return '<input type="checkbox" class="cbx_val" value="' + row.Id + '"/>';
+                                }, width: '20px', className: 'txt-center'
+                            },
+                            { "title": '名称', "targets": 1, "data": "Name", "width": '150px', "className": '' },
+                            { "title": '地址', "targets": 2, "data": "Host", "className": '' },
+                            {
+                                "title": "操作", "targets": 3, "data": function (row, type, val, meta) {
+                                    var menuItems = new Array();
+                                    menuItems.push('<li><a href="javascript:void(0)" class="btn_detail" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-list-alt"></i> 详情</a></li>'.replace('_sysNo', row.Id).replace('_userName', row.Name));
+                                    //menuItems.push('<li><a href="javascript:void(0)" class="btn_edit" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-edit"></i> 编辑</a></li>'.replace('_sysNo', row.Id).replace('_userName', row.Name));
+                                    var menuString = menuItems.join('');
+                                    return '<div class="btn-group"><button type="button" class="btn btn-blue dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理 <span class="caret"></span></button><ul class="dropdown-menu list-dropdown-menu w-62">' + menuString + '</ul></div>';
+                                }, width: '62px', className: 'txt-center'
+                            }
+                ]
+            });
+
+            SearchServer();
+
+            //搜索事件
+            $("#search_btn").click(function () {
+                SearchServer();
+            });
+
+            //创建缓存服务器
+            $("#create_btn").click(function () {
+                OpenEditServerPage('@Url.Action("EditServer","Cache")', '添加服务器');
+            });
+
+            //删除缓存服务器
+            $("body").on("click", ".btn_delete", function () {
+                var sysNo = $(this).attr("sysno");
+                DeleteServer(sysNo);
+            });
+
+            //删除选中
+            $("#deleteselect_btn").click(function () {
+                var checkedValues = GetCheckedSysNos();
+                if (!checkedValues || checkedValues.length <= 0) {
+                    ErrorMsg("还没有选择要删除的信息");
+                    return;
+                }
+                var checkedValueString = checkedValues.join(",");
+                DeleteServer(checkedValueString);
+            });
+
+            //详情
+            $("body").on("click", ".btn_detail", function () {
+                var sysNo = $.trim($(this).attr("sysno"));
+                if (sysNo == "") {
+                    return;
+                }
+                var editUrl = '@Url.Action("ServerDetail", "Cache", new { Id="sys_no"})'.replace('sys_no', sysNo);
+                OpenEditServerPage(editUrl, '缓存服务器详情');
+            });
+        })
+
+        //搜索缓存服务器
+        function SearchServer() {
+            var data = {};
+            PageSearch({
+                url: '@Url.Action("SearchServer","Cache")',
+                data: data,
+                listEle: '#server_table'
+            });
+        }
+
+        //打开缓存服务器编辑页面
+        function OpenEditServerPage(url, tit) {
+            if (!url || $.trim(url) == "") {
+                return;
+            }
+            window.top.OpenNewTabPage(url, tit);
+            //DialogPage({
+            //    url: url,
+            //    title: tit,
+            //    height: '150px',
+            //    width: '650px',
+            //    ok: function () {
+            //        var iframe = this.iframe.contentWindow;
+            //        if (!iframe.document.body) {
+            //            return false;
+            //        };
+            //        iframe.SubmitForm();
+            //        return false;
+            //    }
+            //});
+        }
+
+        //删除缓存服务器
+        function DeleteServer(sysnos) {
+            if (!sysnos || sysnos == "") {
+                return;
+            }
+            ConfirmMsg('确认删除缓存服务器吗?', function () {
+                $.post('@Url.Action("DeleteServer","Cache")', { sysNos: sysnos }, function (res) {
+                    ResultMsg(res);
+                    if (res.Status) {
+                        SearchServer();
+                    }
+                });
+            });
+        };
+    </script>
+}

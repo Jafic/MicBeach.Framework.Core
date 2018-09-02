@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "管理账户";
+}
+@using MicBeach.Application.Identity.User
+@using MicBeach.Util.Extension;
+@using MicBeach.Util.Serialize;
+@{ 
+    var statusValues = UserStatus.正常.GetType().GetEnumValueAndNames();
+}
+<div id="pc-head" class="container pd-0 wp-100 pdt-10 pdb-10">
+    <div class="row pd-0 mg-0">
+        <div class="column col-lg-11 col-md-11 col-sm-11 col-xs-11 hidden-xs lis_search pd-0">
+            <span class="search_inputgroup"><label class="stit">姓名/登录名</label><span class="sctrol"><input type="text" id="search_username" name="search_username" placeholder="" class="form-control" /></span></span>
+            <span class="search_inputgroup"><label class="stit">手机/邮箱/QQ</label><span class="sctrol"><input type="text" id="search_contactkey" name="search_contactkey" placeholder="" class="form-control w_200" /></span></span>
+            <button class="btn btn-default ml_5 fc_3" type="button" id="search_btn"><i class="glyphicon glyphicon-search"></i> 搜索</button>
+        </div>
+        <div class="column col-lg-1 col-md-1 col-sm-1 col-xs-12 pd-0 text-right">
+            <div class="btn-group mgr-5">
+                <button type="button" class="btn btn-sm btn-blue dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    管理操作<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu left-n-38">
+                    <li><a href="javascript:void(0)" id="create_btn"><i class="glyphicon glyphicon-plus"></i> 添加用户</a></li>
+                    <li><a href="javascript:void(0)" id="deleteselect_btn"><i class="glyphicon glyphicon-trash"></i> 删除选中</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="pc-body" class="over-hidden wp-100">
+    <div id="pc-body-inner" class="wp-100 hp-100">
+        <table id="user_table" class="table table-striped table-bordered nowrap wp-100 bd-lw-0" cellspacing="0" cellpadding="0"></table>
+    </div>
+</div>
+
+<div id="pc-foot" class="wp-100 bd-t-solid bd-t-ddd bd-tw-1"></div>
+@section Scripts{
+
+    <script type="text/javascript">
+        BodyScroll = false;
+        var userStatusDic=new Object();
+        $(function () {
+
+            userStatusDic=JSON.parse('@Html.Raw(JsonSerialize.ObjectToJson(statusValues))');
+
+            //初始化数据表
+            var columnConfigs=new Array();
+            columnConfigs.push({ "title": '<input type="checkbox" class="cbx_all"/>', "targets": 0,"data":function ( row, type, val, meta ) {
+                if(!row.SuperUser){
+                    return '<input type="checkbox" class="cbx_val" value="'+row.SysNo+'"/>';
+                }
+                else{
+                    return '';
+                }
+            },width:'20px',className:'txt-center' });
+            for(var i=1;i<=6;i++){
+                var tit='';
+                var data='';
+                var width='';
+                var className='';
+                var render;
+                switch(i){
+                    case 1:
+                        tit="姓名";
+                        data="RealName";
+                        width="150px";
+                        break;
+                    case 2:
+                        tit="登录名";
+                        data="UserName";
+                        width="150px";
+                        break;
+                    case 3:
+                        tit="手机";
+                        data="Mobile";
+                        width="150px";
+                        break;
+                    case 4:
+                        tit="邮箱";
+                        data="Email"
+                        break;
+                    case 5:
+                        tit="状态";
+                        data="Status";
+                        width="50px";
+                        className="txt-center";
+                        render=function(data, type, row, meta){
+                            return userStatusDic[data];
+                        }
+                        break;
+                    case 6:
+                        tit="添加时间";
+                        data="CreateDate";
+                        width="130px";
+                        className="txt-center";
+                        render=function( data, type, row, meta ){
+                            return  moment(data).format("YYYY-MM-DD HH:mm");
+                        }
+                        break;
+                }
+                columnConfigs.push({ "title":tit, "targets": i,"data":data,"width":width,"className":className,'render':render });
+            }
+            columnConfigs.push({ "title": "操作", "targets": 7,"data":function(row,type,val,meta){
+                var menuItems=new Array();
+                menuItems.push('<li><a href="javascript:void(0)" class="btn_detail" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-list-alt"></i> 详情</a></li>'.replace('_sysNo',row.SysNo).replace('_userName',row.UserName));
+                menuItems.push('<li><a href="javascript:void(0)" class="btn_edit" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-edit"></i> 编辑</a></li>'.replace('_sysNo',row.SysNo).replace('_userName',row.UserName));
+                if(!row.SuperUser){
+                    switch(row.Status){
+                        case @((int)UserStatus.正常):
+                            menuItems.push('<li><a href="javascript:void(0)" class="btn_unenable" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-eye-close"></i> 锁定</a></li>'.replace('_sysNo',row.SysNo).replace('_userName',row.UserName));
+                            break;
+                        case @((int)UserStatus.锁定):
+                            menuItems.push('<li><a href="javascript:void(0)" class="btn_enable" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-eye-open"></i> 解锁</a></li>'.replace('_sysNo',row.SysNo).replace('_userName',row.UserName));
+                            break;
+                    }
+                    menuItems.push('<li><a href="javascript:void(0)" class="btn_auth" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-check"></i> 授权</a></li>'.replace('_sysNo',row.SysNo).replace('_userName',row.UserName));
+                    menuItems.push('<li><a href="javascript:void(0)" class="btn_delete" sysno="_sysNo" username="_userName"><i class="glyphicon glyphicon-trash"></i> 删除</a></li>'.replace('_sysNo',row.SysNo).replace('_userName',row.UserName));
+                }
+                var menuString=menuItems.join('');
+                return '<div class="btn-group"><button type="button" class="btn btn-blue dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理 <span class="caret"></span></button><ul class="dropdown-menu list-dropdown-menu w-62">'+menuString+'</ul></div>';
+            },width:'62px',className:'txt-center' });
+            InitDataTable({
+                TableEle:'#user_table',
+                "columnDefs":columnConfigs
+            });
+            SearchUser();
+
+            //搜索事件
+            $("#search_btn").click(function () {
+                SearchUser();
+            });
+
+            //创建用户
+            $("#create_btn").click(function () {
+                OpenEditUserPage('@Url.Action("EditUser","Sys")', '添加用户');
+            });
+
+            //删除用户
+            $("body").on("click", ".btn_delete", function () {
+                var sysNo = $(this).attr("sysno");
+                DeleteUser(sysNo);
+            });
+
+            //删除选中
+            $("#deleteselect_btn").click(function () {
+                var checkedValues = GetDataTableCheckedValues("#user_table");
+                if (!checkedValues || checkedValues.length <= 0) {
+                    ErrorMsg("还没有选择要删除的信息");
+                    return;
+                }
+                var checkedValueString = checkedValues.join(",");
+                DeleteUser(checkedValueString);
+            });
+
+            //编辑
+            $("body").on("click", ".btn_edit", function () {
+                var sysNo = $.trim($(this).attr("sysno"));
+                if (sysNo == "") {
+                    return;
+                }
+                var editUrl = '@Url.Action("EditUser", "Sys", new { SysNo="sys_no"})'.replace('sys_no', sysNo);
+                OpenEditUserPage(editUrl, '编辑用户');
+            });
+            //详情
+            $("body").on("click", ".btn_detail", function () {
+                var sysNo = $.trim($(this).attr("sysno"));
+                if (sysNo == "") {
+                    return;
+                }
+                var detailUrl = '@Url.Action("AdminUserDetail", "Sys", new { id="sys_no"})'.replace('sys_no', sysNo);
+                OpenEditUserPage(detailUrl, '用户详情');
+            });
+            //锁定
+            $("body").on("click", ".btn_unenable", function () {
+                var sysNo = $.trim($(this).attr("sysno"));
+                if (sysNo == "") {
+                    return;
+                }
+                ModifyStatus(sysNo,@((int)UserStatus.锁定),'账户锁定后将不能登陆,确认锁定吗?');
+            });
+            //解锁
+            $("body").on("click", ".btn_enable", function () {
+                var sysNo = $.trim($(this).attr("sysno"));
+                if (sysNo == "") {
+                    return;
+                }
+                ModifyStatus(sysNo,@((int)UserStatus.正常),'账户解锁后将恢复登陆,确认解锁吗?');
+            });
+            //修改密码
+            $("body").on("click",".btn_updatepwd",function(){
+                var sysNo = $.trim($(this).attr("sysno"));
+                if (sysNo == "") {
+                    return;
+                }
+                DialogPage({
+                    url: '@Url.Action("AdminModifyPassword", "Sys",new { sysNo="_id"})'.replace('_id',sysNo),
+                    width: "550px",
+                    height: "150px",
+                    title: '修改密码',
+                    ok: false,
+                    cancel: null
+                });
+            });
+        })
+
+        //搜索管理用户
+        function SearchUser() {
+            var userName = $.trim($("#search_username").val());
+            var contactName = $.trim($("#search_contactkey").val());
+            var data = { NameMateKey: userName, ContactMateKey: contactName };
+            PageSearch({
+                url: '@Url.Action("SearchUser","Sys")',
+                data: data,
+                listEle:'#user_table'
+            });
+        }
+
+        //打开管理用户编辑页面
+        function OpenEditUserPage(url, tit) {
+            if (!url || $.trim(url) == "") {
+                return;
+            }
+            window.top.OpenNewTabPage(url, tit);
+        }
+
+        //删除管理用户
+        function DeleteUser(sysnos) {
+            if (!sysnos || sysnos == "") {
+                return;
+            }
+            ConfirmMsg('确认删除管理用户吗?', function () {
+                $.post('@Url.Action("DeleteUser","Sys")', { sysNos: sysnos }, function (res) {
+                    ResultMsg(res);
+                    if (res.Success) {
+                        SearchUser();
+                    }
+                });
+            });
+        };
+
+        //修改用户状态
+        function ModifyStatus(id, status, msg) {
+            ConfirmMsg(msg, function () {
+                $.post('@Url.Action("ModifyUserStatus", "Sys")', { id: id,status:status }, function (res) {
+                    ResultMsg(res);
+                    if (res.Success) {
+                        SearchUser();
+                    }
+                });
+            });
+        }
+    </script>
+
+}

@@ -1,0 +1,16 @@
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.deps.json
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Develop.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Entity.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Develop.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Entity.Sys.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\DataAccess\MicBeach.DataAccessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.DataAccessContract.Sys.pdb

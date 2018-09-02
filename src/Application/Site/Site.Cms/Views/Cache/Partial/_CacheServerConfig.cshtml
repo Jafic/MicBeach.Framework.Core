@@ -1,0 +1,207 @@
+@using MicShop.ViewModel.Cache
+@using MicBeach.Cache
+@model CacheServerConfigViewModel
+
+<div class="form-con">
+@using (Html.AjaxBeginForm("ApplyCacheServerConfig", "Cache", new AjaxFormOptions() { HttpMethod = "Post", OnSuccess = "CacheServerConfigSuccessCallback", OnFailure = "CacheServerConfigFailedCallback" }, new { id = "cacheserverconfig_form" }))
+{
+    <input type="hidden" name="serverId" value="@ViewBag.ServerId"/>
+    <table cellpadding="0" cellspacing="0" class="form_table">
+        @*<tr>
+            <td class="t_r tit">地址:</td>
+            <td>
+                @Html.TextBoxFor(a => a.Host, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.Host, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">端口:</td>
+            <td>
+                @Html.TextBoxFor(a => a.Port, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.Port, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">守护进程运行:</td>
+            <td>
+                @Html.CheckBoxFor(a => a.Daemonize, new { @class = "" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">守护进程文件:</td>
+            <td>
+                @Html.TextBoxFor(a => a.PidFile, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.PidFile, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        <tr>
+            <td class="t_r tit">客户端闲置超时时间(秒):</td>
+            <td>
+                @Html.TextBoxFor(a => a.TimeOut, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.TimeOut, "", new { @class = "tip prompt" })
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r tit">日志记录级别:</td>
+            <td>
+                @Html.EnumToSelect(a => a.LogLevel, LogLevel.Verbose, new { @class = "form-control w_200" }, selectedValue: ((int)Model.LogLevel).ToString())
+            </td>
+        </tr>
+        @*<tr>
+            <td class="t_r tit">日志记录方式:</td>
+            <td>
+                @Html.TextBoxFor(a => a.LogFile, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.LogFile, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">数据库数量:</td>
+            <td>
+                @Html.TextBoxFor(a => a.DataBase, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.DataBase, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        <tr>
+            <td class="t_r tit">保存是否压缩数据:</td>
+            <td>
+                @Html.CheckBoxFor(a => a.RdbCompression, new { @class = "" })
+            </td>
+        </tr>
+        @*<tr>
+            <td class="t_r tit">数据库文件:</td>
+            <td>
+                @Html.TextBoxFor(a => a.DbFileName, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.DbFileName, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        <tr>
+            <td class="t_r tit">数据库文件路径:</td>
+            <td>
+                @Html.TextBoxFor(a => a.DbDir, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.DbDir, "", new { @class = "tip prompt" })
+            </td>
+        </tr>
+        @*<tr>
+            <td class="t_r tit">主服务地址:</td>
+            <td>
+                @Html.TextBoxFor(a => a.MasterHost, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.MasterHost, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">主服务端口:</td>
+            <td>
+                @Html.TextBoxFor(a => a.MasterPort, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.MasterPort, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        <tr>
+            <td class="t_r tit">主服务密码:</td>
+            <td>
+                @Html.TextBoxFor(a => a.MasterPwd, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.MasterPwd, "", new { @class = "tip prompt" })
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r tit">连接密码:</td>
+            <td>
+                @Html.TextBoxFor(a => a.Pwd, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.Pwd, "", new { @class = "tip prompt" })
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r tit">最大客户端连接数:</td>
+            <td>
+                @Html.TextBoxFor(a => a.MaxClient, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.MaxClient, "", new { @class = "tip prompt" })
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r tit">最大内存限制(byte):</td>
+            <td>
+                @Html.TextBoxFor(a => a.MaxMemory, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.MaxMemory, "", new { @class = "tip prompt" })
+            </td>
+        </tr>
+        <tr>
+            <td class="t_r tit">是否每次更新操作进行日志记录:</td>
+            <td>
+                @Html.CheckBoxFor(a => a.AppendOnly, new { @class = "" })
+            </td>
+        </tr>
+        @*<tr>
+            <td class="t_r tit">更新日志文件名:</td>
+            <td>
+                @Html.TextBoxFor(a => a.AppendFileName, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.AppendFileName, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        <tr>
+            <td class="t_r tit">更新日志条件:</td>
+            <td>
+                @Html.EnumToSelect(a => a.AppendfSync, AppendfSync.EverySecond, new { @class = "form-control w_200" }, selectedValue: ((int)Model.AppendfSync).ToString())
+            </td>
+        </tr>
+        @*<tr>
+            <td class="t_r tit">启用虚拟内存:</td>
+            <td>
+                @Html.CheckBoxFor(a => a.EnabledVM, new { @class = "" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">虚拟内存文件路径:</td>
+            <td>
+                @Html.TextBoxFor(a => a.VMSwapFile, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.VMSwapFile, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">虚拟内存临界值:</td>
+            <td>
+                @Html.TextBoxFor(a => a.VMMaxMemory, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.VMMaxMemory, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">Swap文件Page大小:</td>
+            <td>
+                @Html.TextBoxFor(a => a.VMPageSize, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.VMPageSize, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">Swap文件中的Page数量:</td>
+            <td>
+                @Html.TextBoxFor(a => a.VMPages, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.VMPages, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">访问Swap文件的线程数:</td>
+            <td>
+                @Html.TextBoxFor(a => a.VMMaxThreads, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.VMMaxThreads, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+        @*<tr>
+            <td class="t_r tit">是否把较小的包合并为一个包发送:</td>
+            <td>
+                @Html.CheckBoxFor(a => a.Glueoutputbuf, new { @class = "" })
+            </td>
+        </tr>*@
+        <tr>
+            <td class="t_r tit">激活重置哈希:</td>
+            <td>
+                @Html.CheckBoxFor(a => a.ActivereHashing, new { @class = "" })
+            </td>
+        </tr>
+        @*<tr>
+            <td class="t_r tit">其它的配置文件:</td>
+            <td>
+                @Html.TextBoxFor(a => a.IncludeConfigFile, new { @class = "form-control w_200" })
+                @Html.DefaultValidationMessageFor(a => a.IncludeConfigFile, "", new { @class = "tip prompt" })
+            </td>
+        </tr>*@
+    </table>
+}
+</div>

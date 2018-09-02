@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "用户选择";
+}
+@using MicBeach.ViewModel.Sys;
+@using MicBeach.Util.Serialize;
+@using MicBeach.ViewModel.Sys.Filter;
+@model AdminUserFilterViewModel
+<div id="pc-body">
+    <div id="pc-body-inner">
+        <div class="form_tabgroup c_pagecon">
+            <ul class="nav nav-tabs c_head" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#s_list" role="tab" data-toggle="tab" class="bd-lw-0">用户列表</a>
+                </li>
+                <li role="presentation">
+                    <a href="#s_selected" role="tab" data-toggle="tab">已选用户</a>
+                </li>
+            </ul>
+            <div class="form_tabgconent tab-content dialog c_body">
+                <div role="tabpanel" class="tab-pane active c_pagecon" id="s_list">
+                    <div class="c_head panel panel-default mg-0 bd-w-0">
+                        <div class="panel-body pd-10">
+                            <div class="lis_search">
+                                <label class="stit">姓名/登陆名</label><span class="sctrol"><input type="text" id="search_username" name="search_username" placeholder="" class="form-control w_150" /></span>
+                                <label class="stit">手机/邮箱</label><span class="sctrol"><input type="text" id="search_contact" name="search_contact" placeholder="" class="form-control w_150" /></span>
+                                <button class="btn btn-default ml_5 fc_3" type="button" id="search_btn"><i class="glyphicon glyphicon-search"></i> 搜索</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="c_body">
+                        <table id="user_table" class="table table-striped table-bordered nowrap wp-100 bd-lw-0" cellspacing="0" cellpadding="0">
+                        </table>
+                    </div>
+
+                    <div class="c_foot bd-t-solid bd-t-ddd bd-tw-1" id="tab_pager"></div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane c_pagecon" id="s_selected">
+                    <div class="c_head panel panel-default mg-0 bd-w-0">
+                        <div class="panel-body pd-10">
+                            <div class="lis_search txt-right">
+                                <button type="button" class="btn btn-danger" id="btn_cacheallselected"><i class="glyphicon glyphicon-trash"></i> 取消全部</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="c_body">
+                        <table id="selected_user_table" class="table table-striped table-bordered nowrap wp-100 bd-lw-0" cellspacing="0" cellpadding="0">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pc-foot">
+    <div class="txt-right form-submitbtn-con pdr-10"><button type="button" onclick="ConfirmSelect()" class="btn btn-blue">确定</button></div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        BodyScroll = false;
+        HasDivPageCon = true;
+        IsDialogPage = true;
+        TabConentScroll = true;
+        var SelectData = new Object();
+        var selectObjects = new Array();
+        var sysNos = '';
+        var allDatas = new Object();
+        var searchData = JSON.parse('@Html.Raw(JsonSerialize.ObjectToJson(Model))');
+        $(function () {
+            if (art.dialog.data("RemoveUserSysNos")) {
+                sysNos = art.dialog.data("RemoveUserSysNos");
+            }
+
+            //初始化数据表
+            var columnConfigs = new Array();
+            var selectColumnConfigs = new Array();
+            for (var i = 0; i < 4; i++) {
+                var tit = '';
+                var data = '';
+                var width = '';
+                var className = '';
+                var render;
+                switch (i) {
+                    case 0:
+                        tit = "姓名";
+                        data = "RealName";
+                        width = "100px";
+                        break;
+                    case 1:
+                        tit = "登录名";
+                        data = "UserName";
+                        width = "150px";
+                        break;
+                    case 2:
+                        tit = "手机";
+                        data = "Mobile";
+                        width = "150px";
+                        break;
+                    case 3:
+                        tit = "邮箱";
+                        data = "Email"
+                        break;
+                }
+                var configItem = { "title": tit, "targets": i, "data": data, "width": width, "className": className, 'render': render };
+                columnConfigs.push(configItem);
+                selectColumnConfigs.push(configItem)
+            }
+            columnConfigs.push({
+                "title": "操作", "targets": 4, "data": function (row, type, val, meta) {
+                    return '<button type="button" data-value="'+row.SysNo+'" class="btn btn-xs btn-blue btn_select">选择</button>';
+                }, width: '40px', className: 'txt-center'
+            });
+            selectColumnConfigs.push({
+                "title": "操作", "targets": 4, "data": function (row, type, val, meta) {
+                    return '<button type="button" data-value="' + row.SysNo + '" class="btn btn-xs btn-danger btn_cancel">取消</button>';
+                }, width: '40px', className: 'txt-center'
+            });
+            InitDataTable({
+                TableEle: '#user_table',
+                "columnDefs": columnConfigs
+            });
+            InitDataTable({
+                TableEle: '#selected_user_table',
+                "columnDefs": selectColumnConfigs
+            });
+
+            Search();
+
+            //搜索事件
+            $("#search_btn").click(function () {
+                Search();
+            });
+
+            //选择数据
+            $("body").on("click", ".btn_select", function () {
+                var btn = $(this);
+                SelectValue(btn);
+            });
+
+            //取消选择
+            $("body").on("click", ".btn_cancel", function () {
+                var btn = $(this);
+                var sysNo = $.trim(btn.attr("data-value"));
+                DeleteSelectValue(sysNo);
+            });
+
+            //删除选择
+            $("body").on("click", ".btn_delete", function () {
+                var btn = $(this);
+                var sysNo = $.trim(btn.attr("data-value"));
+                DeleteSelectValue(sysNo);
+            });
+            //删除所有选中
+            $("#btn_cacheallselected").click(function () {
+                for (var s in SelectData) {
+                    DeleteSelectValue(s);
+                }
+            });
+
+            LayoutCallbackEvent = InitSelect;
+        })
+
+        //搜索数据
+        function Search() {
+            var searchKey = $.trim($("#search_username").val());
+            var contactKey = $.trim($("#search_contact").val());
+            var data = { UserName: searchKey, ContactName: contactKey };
+            if (searchData) {
+                if (searchData.RoleIds && searchData.RoleIds.length > 0) {
+                    data.RoleIds = searchData.RoleIds;
+                }
+                if (searchData.ExcludeRoleIds && searchData.ExcludeRoleIds.length > 0) {
+                    data.ExcludeRoleIds = searchData.ExcludeRoleIds;
+                }
+                if (searchData.ApplicationCodes && searchData.ApplicationCodes.length > 0) {
+                    data.ApplicationCodes = searchData.ApplicationCodes;
+                }
+                if (searchData.ExcludeApplicationCodes && searchData.ExcludeApplicationCodes.length > 0) {
+                    data.ExcludeApplicationCodes = searchData.ExcludeApplicationCodes;
+                }
+            }
+            PageSearch({
+                url: '@Url.Action("AdminUserMultiSelectSearch", "Sys")',
+                data: data,
+                listEle:'#user_table',
+                pagerEle: "#tab_pager",
+                selectPage: true,
+                callback: InitSelect
+            });
+        }
+
+        //返回选中的数据
+        function ConfirmSelect() {
+            art.dialog.close(true);
+            art.dialog.opener.AdminUserMultiSelectCallback(selectObjects);
+        }
+
+        //选择数据
+        function SelectValue(btn) {
+            if (!btn || !allDatas) {
+                return;
+            }
+            var sysNo = $.trim(btn.attr("data-value"));
+            if (sysNo == "") {
+                return;
+            }
+            btn.removeClass("btn_select").removeClass("btn-blue").addClass("btn_cancel").addClass("btn-danger").html("取消");
+            if (!SelectData[sysNo]) {
+                var nowProObj = allDatas[sysNo];
+                if (!nowProObj) {
+                    return;
+                }
+                AddDataTableData("#selected_user_table",[nowProObj]);
+                SelectData[sysNo] = true;
+                selectObjects.push(nowProObj);
+            }
+        }
+
+        //删除选择
+        function DeleteSelectValue(sysNo) {
+            if (!sysNo || sysNo == "") {
+                return;
+            }
+            if (!SelectData[sysNo]) {
+                return;
+            }
+            SelectData[sysNo] = false;
+            for (var d in selectObjects) {
+                if (selectObjects[d].SysNo == sysNo) {
+                    selectObjects.splice(d, 1);
+                    break;
+                }
+            }
+            var btn = $('.btn_cancel[data-value="' + sysNo + '"]');
+            if (btn.length > 0) {
+                btn.removeClass("btn_cancel").removeClass("btn-danger").addClass("btn_select").addClass("btn-blue").html("选择");
+            }
+            ReplaceDataTableData("#selected_user_table",selectObjects);
+        }
+
+        //初始化信息
+        function InitSelect(datas) {
+            if (datas) {
+                for (var p in datas) {
+                    var data = datas[p];
+                    allDatas[data.SysNo] = data;
+                }
+            }
+            if (!SelectData) {
+                return;
+            }
+            for (var sysNo in SelectData) {
+                if (!SelectData[sysNo]) {
+                    continue;
+                }
+                $('.btn_select[data-value="' + sysNo + '"]').each(function(i,e){
+                    SelectValue($(e));
+                });
+            }
+        }
+    </script>
+
+}

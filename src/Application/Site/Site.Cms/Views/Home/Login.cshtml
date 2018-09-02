@@ -1,0 +1,132 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "登陆";
+}
+@using MicBeach.ViewModel.Sys
+@model LoginViewModel
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>管理登录</title>
+    <environment>
+        <link href="~/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/css/common.css" rel="stylesheet" />
+        <link href="~/css/margin.css" rel="stylesheet" />
+        <link href="~/css/padding.css" rel="stylesheet" />
+        <link href="~/css/position.css" rel="stylesheet" />
+        <link href="~/css/wh.css" rel="stylesheet" />
+        <link href="~/css/border.css" rel="stylesheet" />
+        <link href="~/css/login.css" rel="stylesheet" />
+    </environment>
+</head>
+<body>
+    <div class="p-body">
+        <div class="m-logbg">
+            <img src="~/images/loginbg01.jpg" class="wp-100 hp-100" />
+        </div>
+        <!--logo-->
+        <div class="g-logo"></div>
+        <div id="login-input-con">
+            <div id="login-input-coninner">
+                <!--内容-->
+                <div class="g-login">
+                    <div class="header"><span class="iconlogin_40clock fr"></span>用户登录</div>
+                    <div class="comon">
+                        @using (Html.AjaxBeginForm("Login", "Home", new AjaxFormOptions() { OnSuccess = "LoginSuccess", OnBegin = "LoginBegin", HttpMethod = "Post" }, new { id = "loginform" }))
+                        {
+                            <ul>
+                                <li><span class="iconlogin_30user ps-absolute"></span>@Html.TextBoxFor(c => c.LoginName, new { @class = "form-control input-lg", placeholder = "用户名" })</li>
+                                <li><span class="iconlogin_30key ps-absolute"></span>@Html.PasswordFor(c => c.Pwd, new { @class = "form-control input-lg", placeholder = "密码" })</li>
+                                <li><span class="iconlogin_30notice ps-absolute"></span>@Html.TextBoxFor(c => c.VerificationCode, new { @class = "form-control input-lg wd160 f_l", placeholder = "验证码" })<img class="fl w-147 h-46 mgl-5" src="@Url.Action("VCode","Home")" alt="" id="log_vcodeimg" style="cursor:pointer" /></li>
+                            </ul>
+                        }
+                    </div>
+                    <div class="footer"><span class="red fs-14 lab_error_msg" id="log_error_msg"></span><a class="btn btn-blue01 fr btn-lg fs-14" id="loginbtn">&nbsp;&nbsp;登录&nbsp;&nbsp;</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <environment>
+        <script src="~/js/jquery.js"></script>
+        <script src="~/js/jquery-ui.js"></script>
+        <script src="~/js/jquery.validate.js"></script>
+        <script src="~/js/jquery.validate.unobtrusive.js"></script>
+        <script src="~/js/jquery.unobtrusive-ajax.js"></script>
+    </environment>
+    <script type="text/javascript">
+        window.onload = function () {
+            if (!window.applicationCache) {
+                window.location.href = "@Url.Action("Browser","Home")";
+            }
+        }
+        var imgUrl = '@Url.Action("VCode","Home")';
+        var homeUrl = '@Url.Action("Index","Home")';
+        $(function () {
+            if (self != top) {
+                top.location.href = "@Url.Action("Login","Home")";
+            }
+            $("#log_vcodeimg,#reg_vcodeimg").click(function () {
+                $(this).attr("src", imgUrl + "?k=" + Math.random());
+            });
+            PositionLoginCon();
+            $(window).resize(function (e) {
+                PositionLoginCon();
+            });
+            function PositionLoginCon() {
+                var winHeight = $(window).height();
+                var loginHeight = $("#login-input-con").height();
+                $("#login-input-con").css("margin-top", (winHeight - loginHeight) / 2);
+            }
+            $("#loginbtn").click(function () {
+                $("#loginform").submit();
+            });
+
+            $(window).keydown(function (e) {
+                if (e.keyCode == 13) {
+                    $("#loginform").submit();
+                }
+            });
+            //注册按钮
+            $("#reg_link_btn").click(function () {
+                FormAnimate(true);
+            });
+            $("#login_link_btn").click(function () {
+                FormAnimate(false);
+            });
+            $("#log_vcodeimg").click();
+        });
+
+        function ValidError(error, input) {
+            input.addClass("error");
+            $(input).parents(".g-login").find(".lab_error_msg").removeClass("green").addClass("red").html(error.html());
+        }
+        function ValidSuccess(error, input) {
+            $(input).removeClass("error");
+            $(input).parents(".g-login").find(".lab_error_msg").html("");
+            if ($(input).parents('form').find('input.error').length > 0) {
+                $(input).parents('form').find('input.error').first().blur();
+            }
+
+        }
+        function LoginBegin() {
+            var loginBtn = $("#loginbtn");
+            loginBtn.attr("disabled", "disabled").html("登录中...");
+        }
+        function LoginSuccess(res) {
+            var loginBtn = $("#loginbtn");
+            if (res.Success) {
+                loginBtn.html("登录成功,跳转中...");
+                window.location.href = homeUrl;
+            } else {
+                $("#log_vcodeimg").click();
+                loginBtn.html("&nbsp;&nbsp;登录&nbsp;&nbsp;").removeAttr("disabled");
+                $("#log_error_msg").html(res.Message);
+            }
+        }
+    </script>
+</body>
+</html>

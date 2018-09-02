@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Dev\MicBeach.DataValidation\MicBeach.DataValidation.csproj" />
+    <ProjectReference Include="..\..\..\..\Util\MicBeach.Util\MicBeach.Util.csproj" />
+    <ProjectReference Include="..\..\..\Logic\Business\Domain\MicBeach.Domain.Sys\MicBeach.Domain.Sys.csproj" />
+    <ProjectReference Include="..\..\Model\DTO\MicBeach.DTO.Sys\MicBeach.DTO.Sys.csproj" />
+    <ProjectReference Include="..\..\Model\Entity\MicBeach.Entity.Sys\MicBeach.Entity.Sys.csproj" />
+    <ProjectReference Include="..\..\Model\Presentation\MicBeach.ViewModel.Sys\MicBeach.ViewModel.Sys.csproj" />
+  </ItemGroup>
+
+</Project>

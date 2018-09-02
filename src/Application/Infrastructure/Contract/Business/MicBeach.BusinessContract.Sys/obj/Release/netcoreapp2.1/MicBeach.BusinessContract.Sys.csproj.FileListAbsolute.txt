@@ -1,0 +1,16 @@
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.deps.json
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Develop.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.DTO.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Develop.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\bin\Release\netcoreapp2.1\MicBeach.DTO.Sys.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Contract\Business\MicBeach.BusinessContract.Sys\obj\Release\netcoreapp2.1\MicBeach.BusinessContract.Sys.pdb

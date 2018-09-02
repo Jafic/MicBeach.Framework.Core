@@ -1,0 +1,12 @@
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\bin\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.deps.json
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\bin\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\bin\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.VerificationCode.SkiaSharp\obj\Release\netcoreapp2.1\MicBeach.VerificationCode.SkiaSharp.pdb

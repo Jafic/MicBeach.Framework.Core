@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "编辑权限";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using MicBeach.Util.Extension
+@using MicBeach.ViewModel.Sys
+@using MicBeach.Application.Identity.Auth
+@model AuthorityViewModel
+@{
+    bool isAdd = Model.Code.IsNullOrEmpty();
+}
+<div id="pc-body">
+    <div id="pc-body-inner">
+        <div class="form-con" id="home">
+            @using (Html.AjaxBeginForm("EditAuthority", "Sys", new AjaxFormOptions() { HttpMethod = "Post", OnSuccess = "EditSuccessCallback", OnFailure = "EditFailedCallback" }, new { id = "formvalide" }))
+            {
+                @Html.HiddenFor(r => r.AuthGroup.SysNo)
+                <table cellpadding="0" cellspacing="0" class="form_table">
+                    @if (Model.AuthGroup != null)
+                    {
+                        <tr>
+                            <td class="txt-right tit">权限分组</td>
+                            <td>
+                                【@Model.AuthGroup.Name】
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="txt-right tit">* @Html.LabelFor(c => c.Name)</td>
+                        <td>
+                            @Html.TextBoxFor(a => a.Name, new { @class = "form-control w-200" })
+                            @Html.DefaultValidationMessageFor(a => a.Name, "", new { @class = "tip prompt" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="txt-right tit">* @Html.LabelFor(c => c.Code)</td>
+                        <td>
+                            @if (isAdd)
+                            {
+                                @Html.TextBoxFor(a => a.Code, new { @class = "form-control w-200" })
+                                @Html.DefaultValidationMessageFor(a => a.Code, "", new { @class = "tip prompt" })
+                            }
+                            else
+                            {   
+                                @Html.HiddenFor(r => r.Code )
+                                <span>【@Model.Code】</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="txt-right tit">* @Html.LabelFor(c => c.Status)</td>
+                        <td>
+                            @Html.EnumToSelect(a => a.Status, AuthorityStatus.启用, new { @class = "form-control w-200" }, "", "选择状态", ((int)Model.Status).ToString())
+                            @Html.DefaultValidationMessageFor(a => a.Status, "", new { @class = "tip prompt" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="txt-right tit">@Html.LabelFor(c => c.Remark)</td>
+                        <td>
+                            @Html.TextAreaFor(a => a.Remark, new { @class = "form-control w-200", style = "height:50px" })
+                            @Html.DefaultValidationMessageFor(a => a.Remark, "", new { @class = "tip prompt" })
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+<div id="pc-foot">
+    <div class="txt-right form-submitbtn-con pdr-10"><button type="button" onclick="SubmitForm()" class="btn btn-blue"><i class="glyphicon glyphicon-floppy-save"></i> 提交</button></div>
+</div>
+<script type="text/javascript">
+    HasDivPageCon = true;
+    var isAdd = '@isAdd.ToString().ToLower()' == 'true';
+
+    //提交表单
+    function SubmitForm() {
+        $("#formvalide").submit();
+    }
+
+    //成功回调
+    function EditSuccessCallback(res) {
+        if (!res) {
+            return;
+        }
+        if (res.Success) {
+            art.dialog.opener.LoadAuthoritys();
+            art.dialog.close(true);
+        } else {
+            ResultMsg(res);
+        }
+    }
+
+    //失败回调
+    function EditFailedCallback(res) {
+        ErrorMsg('提交失败');
+    }
+
+</script>

@@ -1,0 +1,16 @@
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.DataValidation.deps.json
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.DataValidation.runtimeconfig.json
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.DataValidation.runtimeconfig.dev.json
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.DataValidation.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.DataValidation.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.Develop.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\bin\Release\netcoreapp2.1\MicBeach.Develop.pdb
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.dll
+F:\Project\Framework\MicBeach.Core\Dev\MicBeach.DataValidation\obj\Release\netcoreapp2.1\MicBeach.DataValidation.pdb

@@ -1,0 +1,79 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": "f8f9f71ba386c0452031cb760571fbcbb34fd00a"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "MicBeach.VerificationCode.SkiaSharp/1.0.0": {
+        "dependencies": {
+          "MicBeach.Util": "1.0.0",
+          "SkiaSharp": "1.60.2"
+        },
+        "runtime": {
+          "MicBeach.VerificationCode.SkiaSharp.dll": {}
+        }
+      },
+      "SkiaSharp/1.60.2": {
+        "runtime": {
+          "lib/netstandard1.3/SkiaSharp.dll": {
+            "assemblyVersion": "1.60.0.0",
+            "fileVersion": "1.60.2.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/tizen-armel/native/libSkiaSharp.so": {
+            "rid": "tizen-armel",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/tizen-x86/native/libSkiaSharp.so": {
+            "rid": "tizen-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win7-x64/native/libSkiaSharp.dll": {
+            "rid": "win7-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win7-x86/native/libSkiaSharp.dll": {
+            "rid": "win7-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "MicBeach.Util/1.0.0": {
+        "runtime": {
+          "MicBeach.Util.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MicBeach.VerificationCode.SkiaSharp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SkiaSharp/1.60.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JcMB63zAfGX2Vdi7hbKlNDdh3QljV/lHDf/yMAuxz1yy0iHtGx840gZqJJgLBzyJw4Ojs9braR+LKO1S3cgyqw==",
+      "path": "skiasharp/1.60.2",
+      "hashPath": "skiasharp.1.60.2.nupkg.sha512"
+    },
+    "MicBeach.Util/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,12 @@
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\bin\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.deps.json
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\bin\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\bin\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.dll
+F:\Project\Framework\MicBeach.Core\App-Test\Web\Infrastructure\Model\Presentation\MicBeach.ViewModel.Sys\obj\Release\netcoreapp2.1\MicBeach.ViewModel.Sys.pdb

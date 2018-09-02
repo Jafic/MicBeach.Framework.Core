@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "MicBeach.DB/1.0.0": {
+        "dependencies": {
+          "MicBeach.Develop": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.DB.dll": {}
+        }
+      },
+      "MicBeach.Develop/1.0.0": {
+        "dependencies": {
+          "MicBeach.Util": "1.0.0"
+        },
+        "runtime": {
+          "MicBeach.Develop.dll": {}
+        }
+      },
+      "MicBeach.Util/1.0.0": {
+        "runtime": {
+          "MicBeach.Util.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MicBeach.DB/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Develop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicBeach.Util/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

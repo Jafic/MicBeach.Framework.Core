@@ -1,0 +1,14 @@
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.DB.deps.json
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.DB.dll
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.DB.pdb
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.Develop.dll
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.Util.dll
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.Develop.pdb
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\bin\Release\netcoreapp2.1\MicBeach.Util.pdb
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.csprojAssemblyReference.cache
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.csproj.CoreCompileInputs.cache
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.AssemblyInfoInputs.cache
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.AssemblyInfo.cs
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.csproj.CopyComplete
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.dll
+F:\Project\Framework\MicBeach.Core\DB\MicBeach.DB\obj\Release\netcoreapp2.1\MicBeach.DB.pdb
